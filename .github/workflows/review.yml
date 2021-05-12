@@ -1,0 +1,59 @@
+---
+
+name: Review
+
+on:
+  push:
+    branches:
+      - review-task
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - application-releases/**/*.json
+
+jobs:
+  parse:
+    name: Parse
+    runs-on: ubuntu-latest
+
+    outputs:
+      rdnn: ${{ steps.parse.outputs.rdnn }}
+      version: ${{ steps.parse.outputs.version }}
+      source: ${{ steps.parse.outputs.source }}
+      commit: ${{ steps.parse.outputs.commit }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Parse
+        id: parse
+        uses: elementary/action-appcenter-review-parse@main
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: parse
+
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:elementary-juno
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        run: |
+          git clone ${{ needs.parse.outputs.source }} --depth 1 .
+          git checkout ${{ needs.parse.outputs.commit }}
+
+      - name: Build
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        with:
+          bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
+          manifest-path: ${{ needs.parse.outputs.rdnn }}.yml
+          run-tests: false
+          repository-name: appcenter
+          repository-url: https://flatpak.elementary.io/repo.flatpakrepo
