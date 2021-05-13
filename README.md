@@ -42,8 +42,8 @@ this:
 }
 ```
 
-The `source` field needs to be a publicly accessible git repository. The
-`commit` field is the full git sha for the release we are building.
+The `source` field needs to be a publicly accessible Git repository. The
+`commit` field is the full Git sha for the release we are building.
 
 [1]: https://flatpak.elementary.io
 [2]: https://github.com/elementary/appcenter-reviews/pulls?q=is%3Apr+is%3Aopen+sort%3Acreated-desc
