@@ -23,11 +23,8 @@ published to the [AppCenter Flatpak repository][1]. If any questions or
 requested changes come up during the review process, the reviewer will tag the
 app developer in the conversation on the pull request if possible.
 
-If your app was added with AppCenter Dashboard, future releases and tagged
-commits will be automatically submitted for review and approval as well. If you
-opened a pull request against this repository, you will need to open a new pull
-request for each release, or use the AppCenter Dashboard to set up automatic
-submission of releases.
+Once your app is approved and merged into this repository, future releases and
+tagged commits will be automatically submitted for review and approval.
 
 ## Repository Structure
 
