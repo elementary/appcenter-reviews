@@ -9,11 +9,11 @@ development. If you have issues using it, please [report them][3].
 
 To submit an app, please use [AppCenter Dashboard][4], as it will speed up the
 review process and ensure all the needed data is entered correctly. If you want
-to publish an app that is not hosted on GitHub, your has an RDNN that does not
-match where the code is hosted, or are having an issue submitting with AppCenter
-Dashboard: first make sure your app adheres to the [publishing requirements][5],
-then submit a pull request against this repository following the structure
-below.
+to publish an app that is not hosted on GitHub, your app has an RDNN that does
+not match where the code is hosted, or are having an issue submitting with
+AppCenter Dashboard: first make sure your app adheres to the [publishing
+requirements][5], then submit a pull request against this repository following
+the structure below.
 
 ## Review Process
 
