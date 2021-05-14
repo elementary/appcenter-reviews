@@ -1,0 +1,30 @@
+---
+
+name: "Release"
+description: "Release a new app or version for an app"
+
+title: "<RDNN> <Version>"
+labels: 
+  - Release
+
+body:
+  - type: dropdown
+    id: release-type
+    attributes:
+      label: Type of submission
+      options:
+        - New release
+        - App update
+    validations:
+      required: true
+
+  - type: input
+    id: release-url
+    attributes:
+      label: Repository for application
+      description: |
+        This repository needs to be publicly accessable to code review
+      placeholder: |
+        https://github.com/danrabbit/nimbus
+    validations:
+      required: true
