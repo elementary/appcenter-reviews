@@ -53,3 +53,4 @@ jobs:
           run-tests: false
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
+          branch: stable
