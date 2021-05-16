@@ -40,7 +40,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone ${{ needs.parse.outputs.source }} --depth 1 .
+          git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
       - name: Build
