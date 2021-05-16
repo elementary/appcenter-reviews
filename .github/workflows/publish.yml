@@ -52,6 +52,7 @@ jobs:
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
           branch: stable
+          cache-key: "flatpak-builder-${{ github.sha }}"
 
       - name: Deploy
         uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
