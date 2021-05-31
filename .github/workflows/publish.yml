@@ -44,7 +44,7 @@ jobs:
           git checkout ${{ needs.parse.outputs.commit }}
 
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ needs.parse.outputs.rdnn }}.yml
