@@ -26,7 +26,7 @@ jobs:
 
       - name: Parse
         id: parse
-        uses: elementary/action-appcenter-review-parse@main
+        uses: elementary/action-appcenter-review-parse@v1.0.1
 
   publish:
     name: Publish
