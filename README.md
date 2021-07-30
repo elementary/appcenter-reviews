@@ -29,18 +29,20 @@ tagged commits will be automatically submitted for review and approval.
 ## Repository Structure
 
 All app releases in this repository are found under the `applications/` folder
-and follow this schema `<rdnn>/<release tag>.json`. The JSON file looks like
+and follow this schema `<rdnn>.json`. The JSON file looks like
 this:
 
 ```json
 {
   "source": "https://github.com/danrabbit/harvey.git",
-  "commit": "45dd52660c0069207fa4b0c1fcf7ac6d7157d34b"
+  "commit": "45dd52660c0069207fa4b0c1fcf7ac6d7157d34b",
+  "version": "1.0.1"
 }
 ```
 
 The `source` field needs to be a publicly accessible Git repository. The
-`commit` field is the full Git sha for the release we are building.
+`commit` field is the full Git sha for the release we are building. And the
+`version` needs to be a SemVer tag.
 
 [1]: https://flatpak.elementary.io
 [2]: https://github.com/elementary/appcenter-reviews/pulls?q=is%3Apr+is%3Aopen+sort%3Acreated-desc
