@@ -31,7 +31,7 @@ jobs:
         uses: elementary/action-appcenter-review-parse@v1.0.1
         with:
           regex: |
-            applications\/(?<rdnn>[a-zA-Z0-9\.]+)\.json
+            applications\/(?<rdnn>[a-zA-Z0-9\.\-]+)\.json
 
   build:
     name: Build
