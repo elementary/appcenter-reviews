@@ -48,11 +48,36 @@ jobs:
           git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
-      - name: Build
+      - name: Check for YML manifest
+        id: check_yml
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "${{ needs.parse.outputs.rdnn }}.yml"
+
+      - name: Build YML
+        if: steps.check_yml.outputs.files_exists == 'true'
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ needs.parse.outputs.rdnn }}.yml
+          run-tests: false
+          repository-name: appcenter
+          repository-url: https://flatpak.elementary.io/repo.flatpakrepo
+          branch: stable
+          cache-key: "flatpak-builder-${{ github.sha }}"
+
+      - name: Check for JSON manifest
+        id: check_json
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "${{ needs.parse.outputs.rdnn }}.json"
+
+      - name: Build JSON
+        if: steps.check_json.outputs.files_exists == 'true'
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
+        with:
+          bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
+          manifest-path: ${{ needs.parse.outputs.rdnn }}.json
           run-tests: false
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
