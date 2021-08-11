@@ -18,7 +18,6 @@ jobs:
 
     outputs:
       rdnn: ${{ steps.parse.outputs.rdnn }}
-      manifest: ${{ steps.parse.outputs.manifest }}
       version: ${{ steps.parse.outputs.version }}
       source: ${{ steps.parse.outputs.source }}
       commit: ${{ steps.parse.outputs.commit }}
@@ -34,31 +33,45 @@ jobs:
           regex: |
             applications\/(?<rdnn>[a-zA-Z0-9\.\-]+)\.json
 
+  manifest:
+    name: Get Manifest Path
+    runs-on: ubuntu-latest
+    needs: parse
+
+    outputs:
+      path: ${{ steps.manifest.outputs.path }}
+
+    steps:
+      - name: Checkout
+        run: |
+          git clone ${{ needs.parse.outputs.source }} .
+          git checkout ${{ needs.parse.outputs.commit }}
+
       - name: Check for YML manifest
         id: check_yml
         uses: andstor/file-existence-action@v1
         with:
-          files: "${{ needs.parse.outputs.rdnn }}.yml"
+          files: '${{ needs.parse.outputs.rdnn }}.yml'
 
       - name: Check for JSON manifest
         if: steps.check_yml.outputs.files_exists == 'false'
         id: check_json
         uses: andstor/file-existence-action@v1
         with:
-          files: "${{ needs.parse.outputs.rdnn }}.json"
+          files: '${{ needs.parse.outputs.rdnn }}.json'
 
       - name: Create YML Manifest Path
         if: steps.check_yml.outputs.files_exists == 'true'
-        run: echo "::set-output name=manifest::${{ needs.parse.outputs.rdnn }}.yml"
+        run: echo '::set-output name=path::${{ needs.parse.outputs.rdnn }}.yml'
 
       - name: Create JSON Manifest Path
         if: steps.check_json.outputs.files_exists == 'true'
-        run: echo "::set-output name=manifest::${{ needs.parse.outputs.rdnn }}.json"
+        run: echo '::set-output name=path::${{ needs.parse.outputs.rdnn }}.json'
 
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: parse
+    needs: [parse, manifest]
 
     container:
       image: ghcr.io/elementary/flatpak-platform/runtime:daily
@@ -74,7 +87,7 @@ jobs:
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
-          manifest-path: ${{ needs.parse.outputs.manifest }}
+          manifest-path: ${{ needs.manifest.outputs.path }}
           run-tests: false
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
