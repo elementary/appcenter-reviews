@@ -46,11 +46,17 @@ jobs:
           git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
+      - name: Manifest
+        id: manifest
+        uses: elementary/action-appcenter-review-find-manifest@v1.0.3
+        with:
+          rdnn: ${{ needs.parse.outputs.rdnn }}
+
       - name: Build
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
-          manifest-path: ${{ needs.parse.outputs.rdnn }}.yml
+          manifest-path: ${{ steps.manifest.outputs.manifest }}
           run-tests: false
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
