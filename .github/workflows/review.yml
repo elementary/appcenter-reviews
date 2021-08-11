@@ -74,7 +74,7 @@ jobs:
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
-          manifest-path: ${{ needs.outputs.manifest }}
+          manifest-path: ${{ needs.parse.outputs.manifest }}
           run-tests: false
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
