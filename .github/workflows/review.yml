@@ -29,6 +29,7 @@ jobs:
             - [ ] Matches screenshot
             - [ ] AppData custom colors are contrasty
             - [ ] Name is unique and non-confusing
+            - [ ] Uses elementary Flatpak runtime
 
   parse:
     name: Parse
