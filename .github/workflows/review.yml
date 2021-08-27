@@ -30,6 +30,7 @@ jobs:
             - [ ] AppData custom colors are contrasty
             - [ ] Name is unique and non-confusing
             - [ ] Uses elementary Flatpak runtime
+            - [ ] Sandbox permissions are reasonable
 
   parse:
     name: Parse
