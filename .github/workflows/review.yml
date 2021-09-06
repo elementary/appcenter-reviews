@@ -25,11 +25,19 @@ jobs:
 
             - [ ] App opens
             - [ ] Does what it says
-            - [ ] Matches description in AppData
-            - [ ] Matches screenshot
-            - [ ] AppData custom colors are contrasty
+            
+            ### AppData
             - [ ] Name is unique and non-confusing
-            - [ ] Uses elementary Flatpak runtime
+            - [ ] Matches description
+            - [ ] Matches screenshot
+            - [ ] Launchable tag with matching ID
+            - [ ] Release tag with matching version and YYYY-MM-DD date
+            - [ ] Custom colors meet WCAG A contrast or greater
+            - [ ] OARS info matches
+            
+            ### Flatpak
+            - [ ] Uses elementary runtime
+            - [ ] Sandbox permissions are reasonable
 
   parse:
     name: Parse
