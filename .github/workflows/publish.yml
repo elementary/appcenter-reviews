@@ -36,8 +36,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: parse
 
+    strategy:
+       matrix:
+         arch: [x86_64, aarch64]
+       # Don't fail the whole workflow if one architecture fails
+       fail-fast: false
+
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6
+      image: ghcr.io/elementary/flatpak-platform/runtime:6-${{ matrix.arch }}
       options: --privileged
 
     steps:
@@ -52,8 +58,14 @@ jobs:
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
+      - name: Set up QEMU for aarch64 emulation
+        if: ${{ matrix.arch != 'x86_64' }}
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: arm64
+
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
@@ -62,6 +74,7 @@ jobs:
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
           branch: stable
           cache-key: "flatpak-builder-${{ github.sha }}"
+          arch: ${{ matrix.arch }}
 
       - name: Deploy
         uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
