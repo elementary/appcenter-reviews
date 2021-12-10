@@ -25,6 +25,7 @@ jobs:
 
             - [ ] App opens
             - [ ] Does what it says
+            - [ ] Categories match
             
             ### AppData
             - [ ] Name is unique and non-confusing
