@@ -79,8 +79,10 @@ jobs:
           arch: ${{ matrix.arch }}
 
       - name: Deploy
-        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
+        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v4
         with:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
           token: ${{ secrets.FLAT_MANAGER_TOKEN }}
+          end-of-life: ${{ needs.parse.outputs.end-if-life }}
+          end-of-life-rebase: ${{ needs.parse.outputs.end-of-life-rebase }}
