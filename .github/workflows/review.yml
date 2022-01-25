@@ -49,8 +49,6 @@ jobs:
       version: ${{ steps.parse.outputs.version }}
       source: ${{ steps.parse.outputs.source }}
       commit: ${{ steps.parse.outputs.commit }}
-      end-of-life: ${{ steps.parse.outputs.end-of-life }}
-      end-of-life-rebase: ${{ steps.parse.outputs.end-of-life-rebase }}
 
     steps:
       - name: Checkout
