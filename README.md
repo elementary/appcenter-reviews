@@ -42,7 +42,7 @@ The `source` field needs to be a publicly accessible Git repository. The
 >be submitted for review and approval; submit a pull request modifying your
 >app's existing JSON file with the new commit and version tag.
 
-[AppCenter Dashboard]: https://beta.developer.elementary.io
+[AppCenter Dashboard]: https://github.com/elementary/appcenter-dashboard
 [open pull requests]: https://github.com/elementary/appcenter-reviews/pulls?q=is%3Apr+is%3Aopen+sort%3Acreated-desc
 [1]: https://flatpak.elementary.io
 [2]: https://docs.elementary.io/develop/appcenter/publishing-requirements
