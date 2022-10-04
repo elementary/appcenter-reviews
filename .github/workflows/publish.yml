@@ -84,5 +84,5 @@ jobs:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
           token: ${{ secrets.FLAT_MANAGER_TOKEN }}
-          end-of-life: ${{ needs.parse.outputs.end-if-life }}
+          end-of-life: ${{ needs.parse.outputs.end-of-life }}
           end-of-life-rebase: ${{ needs.parse.outputs.end-of-life-rebase }}
