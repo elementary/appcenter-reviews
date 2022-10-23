@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/danrabbit/lookbook.git",
   "commit": "8d7be2020b90d1f84eaa340d8ea0481cbb79ee83",
-  "version": "1.2.0"
+  "version": "1.2.0",
+  "end-of-life": "Renamed to elementary Icon Browser",
+  "end-of-life-rebase": "io.elementary.iconbrowser"
 }

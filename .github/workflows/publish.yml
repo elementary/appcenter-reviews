@@ -19,6 +19,8 @@ jobs:
       version: ${{ steps.parse.outputs.version }}
       source: ${{ steps.parse.outputs.source }}
       commit: ${{ steps.parse.outputs.commit }}
+      end-of-life: ${{ steps.parse.outputs.end-of-life }}
+      end-of-life-rebase: ${{ steps.parse.outputs.end-of-life-rebase }}
 
     steps:
       - name: Checkout
@@ -26,7 +28,7 @@ jobs:
 
       - name: Parse
         id: parse
-        uses: elementary/action-appcenter-review-parse@v1.0.1
+        uses: elementary/action-appcenter-review-parse@v1.1.0
         with:
           regex: |
             applications\/(?<rdnn>[a-zA-Z0-9\.\-\_]+)\.json
@@ -77,8 +79,10 @@ jobs:
           arch: ${{ matrix.arch }}
 
       - name: Deploy
-        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
+        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v4
         with:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
           token: ${{ secrets.FLAT_MANAGER_TOKEN }}
+          end-of-life: ${{ needs.parse.outputs.end-of-life }}
+          end-of-life-rebase: ${{ needs.parse.outputs.end-of-life-rebase }}
