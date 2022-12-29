@@ -73,7 +73,7 @@ jobs:
       fail-fast: false
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6-${{ matrix.arch }}
+      image: ghcr.io/elementary/flatpak-platform/runtime:7.1-${{ matrix.arch }}
       options: --privileged
 
     steps:
@@ -95,7 +95,7 @@ jobs:
           platforms: arm64
 
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v5
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
