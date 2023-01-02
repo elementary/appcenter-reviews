@@ -51,6 +51,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
+          git config --global --add safe.directory /__w/appcenter-reviews/appcenter-reviews
           git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
