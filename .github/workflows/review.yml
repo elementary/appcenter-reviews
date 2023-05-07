@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checklist
-        uses: elementary/action-appcenter-review-checklist@v1.0.0
+        uses: elementary/action-appcenter-review-checklist@v1.0.1
         with:
           body: |
             ## Review Checklist
@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Parse
         id: parse
@@ -73,12 +73,13 @@ jobs:
       fail-fast: false
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6-${{ matrix.arch }}
+      image: ghcr.io/elementary/flatpak-platform/runtime:7.1-${{ matrix.arch }}
       options: --privileged
 
     steps:
       - name: Checkout
         run: |
+          git config --global --add safe.directory /__w/appcenter-reviews/appcenter-reviews
           git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
@@ -90,12 +91,12 @@ jobs:
 
       - name: Set up QEMU for aarch64 emulation
         if: ${{ matrix.arch != 'x86_64' }}
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
 
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
