@@ -56,7 +56,7 @@ jobs:
 
       - name: Parse
         id: parse
-        uses: elementary/action-appcenter-review-parse@v1.0.1
+        uses: elementary/action-appcenter-review-parse@v1.1.1
         with:
           regex: |
             applications\/(?<rdnn>[a-zA-Z0-9\.\-\_]+)\.json
@@ -85,7 +85,7 @@ jobs:
 
       - name: Manifest
         id: manifest
-        uses: elementary/action-appcenter-review-find-manifest@v1.2.0
+        uses: elementary/action-appcenter-review-find-manifest@v1.4.0
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
