@@ -1,5 +1,7 @@
 ---
-
+# DO NOT modify this workflow to do extra stuff, unless you fully understand the security
+# implications of the `pull_request_target` workflow. See:
+# https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
     name: Checklist
     
     on:
