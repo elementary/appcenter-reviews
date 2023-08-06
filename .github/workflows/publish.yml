@@ -19,14 +19,16 @@ jobs:
       version: ${{ steps.parse.outputs.version }}
       source: ${{ steps.parse.outputs.source }}
       commit: ${{ steps.parse.outputs.commit }}
+      end-of-life: ${{ steps.parse.outputs.end-of-life }}
+      end-of-life-rebase: ${{ steps.parse.outputs.end-of-life-rebase }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Parse
         id: parse
-        uses: elementary/action-appcenter-review-parse@v1.0.1
+        uses: elementary/action-appcenter-review-parse@v1.1.2
         with:
           regex: |
             applications\/(?<rdnn>[a-zA-Z0-9\.\-\_]+)\.json
@@ -43,29 +45,30 @@ jobs:
        fail-fast: false
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6-${{ matrix.arch }}
+      image: ghcr.io/elementary/flatpak-platform/runtime:7.1-${{ matrix.arch }}
       options: --privileged
 
     steps:
       - name: Checkout
         run: |
+          git config --global --add safe.directory /__w/appcenter-reviews/appcenter-reviews
           git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
       - name: Manifest
         id: manifest
-        uses: elementary/action-appcenter-review-find-manifest@v1.2.0
+        uses: elementary/action-appcenter-review-find-manifest@v1.4.1
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
       - name: Set up QEMU for aarch64 emulation
         if: ${{ matrix.arch != 'x86_64' }}
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
 
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
@@ -77,8 +80,10 @@ jobs:
           arch: ${{ matrix.arch }}
 
       - name: Deploy
-        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
+        uses: flatpak/flatpak-github-actions/flat-manager@v6
         with:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
           token: ${{ secrets.FLAT_MANAGER_TOKEN }}
+          end-of-life: ${{ needs.parse.outputs.end-of-life }}
+          end-of-life-rebase: ${{ needs.parse.outputs.end-of-life-rebase }}
