@@ -1,5 +1,6 @@
 {
   "source": "https://github.com/cassidyjames/clairvoyant.git",
   "commit": "527c6f16abf03aba6599a383df5ba50174e2f7ff",
-  "version": "2.0.0"
+  "version": "2.0.0",
+  "end-of-life": "The app is no longer maintained on AppCenter; new releases are available on Flathub"
 }
