@@ -1,5 +1,6 @@
 {
   "source": "https://github.com/cassidyjames/palette.git",
   "commit": "def47dc0d623ec6a0523f593c375b81ac7798f67",
-  "version": "4.0.0"
+  "version": "4.0.0",
+  "end-of-life": "The app is no longer maintained"
 }
