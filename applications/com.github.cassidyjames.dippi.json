@@ -1,5 +1,6 @@
 {
   "source": "https://github.com/cassidyjames/dippi.git",
   "commit": "083defd7db012dc4db0ed3a0bb21cf207a22f7e0",
-  "version": "3.1.4"
+  "version": "3.1.4",
+  "end-of-life": "The app is no longer maintained on elementary AppCenter; new releases are available on Flathub"
 }
