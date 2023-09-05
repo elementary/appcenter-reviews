@@ -1,5 +1,6 @@
 {
   "source": "https://github.com/cassidyjames/principles.git",
   "commit": "cddc1b85a1359fbb3662884695dd0755d04d488d",
-  "version": "2.0.1"
+  "version": "2.0.1",
+  "end-of-life": "The app is no longer maintained"
 }
