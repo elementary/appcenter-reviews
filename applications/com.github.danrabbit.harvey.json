@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/danrabbit/harvey.git",
   "commit": "b379b0a056d1faae57598809261b646710482f8d",
-  "version": "1.0.2"
+  "version": "1.0.2",
+  "end-of-life": "Re-RDNN'd",
+  "end-of-life-rebase": "io.github.danirabbit.harvey"
 }
