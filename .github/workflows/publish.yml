@@ -80,7 +80,7 @@ jobs:
           arch: ${{ matrix.arch }}
 
       - name: Deploy
-        uses: flatpak/flatpak-github-actions/flat-manager@0ab9dd6a6afa6fe7e292db0325171660bf5b6fdf # v6.3 plus https://github.com/flatpak/flatpak-github-actions/pull/160
+        uses: flatpak/flatpak-github-actions/flat-manager@v6.4
         with:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
