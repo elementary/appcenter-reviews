@@ -57,7 +57,7 @@ jobs:
 
       - name: Manifest
         id: manifest
-        uses: elementary/action-appcenter-review-find-manifest@v1.5.0
+        uses: elementary/action-appcenter-review-find-manifest@v1.5.1
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
