@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/matfantinel/reminduck.git",
   "commit": "b66efd6657ed74da38be5ba94a8e3ef51f651989",
-  "version": "1.6.2"
+  "version": "1.6.2",
+  "end-of-life": "Updated by the ellie-commons initiative",
+  "end-of-life-rebase": "io.github.ellie_commons.reminduck"
 }
