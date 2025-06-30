@@ -25,6 +25,7 @@
               token: ${{ secrets.GIT_USER_TOKEN }}
               body: |
                 ## Review Checklist
+                This checklist is used by reviewers, so you don't need to fill in by yourself.
     
                 - [ ] App opens
                 - [ ] Does what it says
