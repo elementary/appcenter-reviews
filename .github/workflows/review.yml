@@ -66,7 +66,7 @@ jobs:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
       - name: Build
-        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
