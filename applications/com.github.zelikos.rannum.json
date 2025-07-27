@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/zelikos/rannum.git",
   "commit": "00b0c36625217e7ce32e634a71c0848c565c37df",
-  "version": "2.1.1"
+  "version": "2.1.1",
+  "end-of-life": "Updated by the ellie-commons initiative",
+  "end-of-life-rebase": "io.github.ellie_commons.rollit"
 }
