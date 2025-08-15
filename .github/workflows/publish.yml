@@ -19,53 +19,54 @@ jobs:
       version: ${{ steps.parse.outputs.version }}
       source: ${{ steps.parse.outputs.source }}
       commit: ${{ steps.parse.outputs.commit }}
+      end-of-life: ${{ steps.parse.outputs.end-of-life }}
+      end-of-life-rebase: ${{ steps.parse.outputs.end-of-life-rebase }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Parse
         id: parse
-        uses: elementary/action-appcenter-review-parse@v1.0.1
+        uses: elementary/action-appcenter-review-parse@v1.2.5
         with:
           regex: |
             applications\/(?<rdnn>[a-zA-Z0-9\.\-\_]+)\.json
 
   publish:
-    name: Publish
-    runs-on: ubuntu-latest
+    name: Publish (${{ matrix.configuration.arch }})
+    runs-on: ${{ matrix.configuration.runs-on }}
     needs: parse
 
     strategy:
-       matrix:
-         arch: [x86_64, aarch64]
-       # Don't fail the whole workflow if one architecture fails
-       fail-fast: false
+      matrix:
+        configuration:
+          - arch: x86_64
+            runs-on: ubuntu-latest
+          - arch: aarch64
+            runs-on: ubuntu-24.04-arm
+      # Don't fail the whole workflow if one architecture fails
+      fail-fast: false
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6-${{ matrix.arch }}
+      image: ghcr.io/elementary/flatpak-platform/runtime:8-${{ matrix.configuration.arch }}
       options: --privileged
 
     steps:
       - name: Checkout
         run: |
+          git config --global --add safe.directory /__w/appcenter-reviews/appcenter-reviews
           git clone ${{ needs.parse.outputs.source }} .
           git checkout ${{ needs.parse.outputs.commit }}
 
       - name: Manifest
         id: manifest
-        uses: elementary/action-appcenter-review-find-manifest@v1.2.0
+        uses: elementary/action-appcenter-review-find-manifest@v1.5.1
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
-      - name: Set up QEMU for aarch64 emulation
-        if: ${{ matrix.arch != 'x86_64' }}
-        uses: docker/setup-qemu-action@v1
-        with:
-          platforms: arm64
-
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.5
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
@@ -74,11 +75,13 @@ jobs:
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
           branch: stable
           cache-key: "flatpak-builder-${{ github.sha }}"
-          arch: ${{ matrix.arch }}
+          arch: ${{ matrix.configuration.arch }}
 
       - name: Deploy
-        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
+        uses: flatpak/flatpak-github-actions/flat-manager@v6.5
         with:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
           token: ${{ secrets.FLAT_MANAGER_TOKEN }}
+          end-of-life: "${{ needs.parse.outputs.end-of-life }}"
+          end-of-life-rebase: ${{ needs.parse.outputs.end-of-life-rebase }}

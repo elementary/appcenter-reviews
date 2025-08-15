@@ -1,0 +1,7 @@
+{
+  "source": "https://github.com/phoneybadger/picker.git",
+  "commit": "7f244e145529b696ea06b1461a050fde93477e2f",
+  "version": "1.1.0",
+  "end-of-life": "Updated by the ellie-commons initiative",
+  "end-of-life-rebase": "io.github.ellie_commons.cherrypick"
+}

@@ -1,0 +1,46 @@
+---
+# DO NOT modify this workflow to do extra stuff, unless you fully understand the security
+# implications of the `pull_request_target` workflow. See:
+# https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
+    name: Checklist
+    
+    on:
+      pull_request_target:
+        types:
+          - opened
+          - synchronize
+          - reopened
+        paths:
+          - applications/**/*.json
+    
+    jobs:
+      setup:
+        name: Setup
+        runs-on: ubuntu-latest
+    
+        steps:
+          - name: Checklist
+            uses: elementary/action-appcenter-review-checklist@v1.2.0
+            with:
+              token: ${{ secrets.GIT_USER_TOKEN }}
+              body: |
+                ## Review Checklist
+                This checklist is used by reviewers, so you don't need to fill in by yourself.
+    
+                - [ ] App opens
+                - [ ] Does what it says
+                - [ ] Categories match
+                
+                ### AppData
+                - [ ] Name is unique and non-confusing
+                - [ ] Matches description
+                - [ ] Matches screenshot
+                - [ ] Launchable tag with matching ID
+                - [ ] Release tag with matching version and YYYY-MM-DD date
+                - [ ] OARS info matches
+                
+                ### Flatpak
+                - [ ] Uses elementary runtime
+                - [ ] Sandbox permissions are reasonable
+    
+      
