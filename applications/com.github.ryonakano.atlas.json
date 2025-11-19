@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/ryonakano/atlas.git",
-  "commit": "fe0dfe80f3b5bcbf0f1f55220e4765645b91698a",
-  "version": "3.1.0"
+  "commit": "f14b913152678ca947ec04070f324d58a4c11f57",
+  "version": "3.1.1",
+  "end-of-life": "Renamed to elementary Maps",
+  "end-of-life-rebase": "io.elementary.maps"
 }
