@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/Alecaddd/sequeler.git",
   "commit": "9c70b9dece84e56a17b15c1f503799e756d13baf",
-  "version": "0.8.2"
+  "version": "0.8.2",
+  "end-of-life": "Updated by the ellie-commons initiative",
+  "end-of-life-rebase": "io.github.ellie_commons.sequeler"
 }
