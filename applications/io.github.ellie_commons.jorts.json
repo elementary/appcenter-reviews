@@ -1,7 +1,7 @@
 {
   "source": "https://github.com/ellie-commons/jorts.git",
   "commit": "673b7cfa8417ea1ce4b898ec6b78fee43a7a8ae4",
-  "version": "4.0.0"
+  "version": "4.0.0",
   "end-of-life": "Reflect organization change",
   "end-of-life-rebase": "io.github.elly_code.jorts"
 }
