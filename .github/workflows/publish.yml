@@ -70,6 +70,7 @@ jobs:
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
+          mirror-screenshots-url: https://flatpak.elementary.io/repo/screenshots
           run-tests: false
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
