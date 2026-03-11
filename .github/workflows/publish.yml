@@ -49,7 +49,11 @@ jobs:
       fail-fast: false
 
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:8-${{ matrix.configuration.arch }}
+      # mirror-screenshots-url option of flatpak-builder action requires flatpak-builder >= 1.4.6,
+      # which is only available on questing or later, to use --compose-url-policy option internally
+      # FIXME: Replace with newer version of our platform that based on resolute
+      #image: ghcr.io/elementary/flatpak-platform/runtime:8-${{ matrix.configuration.arch }}
+      image: ubuntu:resolute-${{ matrix.configuration.arch }}
       options: --privileged
 
     steps:
@@ -64,6 +68,11 @@ jobs:
         uses: elementary/action-appcenter-review-find-manifest@v1.5.1
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
+
+      # FIXME: Remove when we update to the container with flatpak-builder >= 1.4.6
+      - name: Install flatpak-builder
+        run: |
+          apt install -yU flatpak-builder
 
       - name: Build
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6.6
