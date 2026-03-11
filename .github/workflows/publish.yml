@@ -53,7 +53,7 @@ jobs:
       # which is only available on questing or later, to use --compose-url-policy option internally
       # FIXME: Replace with newer version of our platform that based on resolute
       #image: ghcr.io/elementary/flatpak-platform/runtime:8-${{ matrix.configuration.arch }}
-      image: ubuntu:resolute-${{ matrix.configuration.arch }}
+      image: ubuntu:resolute
       options: --privileged
 
     steps:
