@@ -75,7 +75,7 @@ jobs:
           rdnn: ${{ needs.parse.outputs.rdnn }}
 
       - name: Build
-        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.6
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.7
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
@@ -88,7 +88,7 @@ jobs:
           arch: ${{ matrix.configuration.arch }}
 
       - name: Deploy
-        uses: flatpak/flatpak-github-actions/flat-manager@v6.6
+        uses: flatpak/flatpak-github-actions/flat-manager@v6.7
         with:
           repository: appcenter
           flat-manager-url: https://flatpak-api.elementary.io
