@@ -57,6 +57,11 @@ jobs:
       options: --privileged
 
     steps:
+      # FIXME: Remove when we update to the container with flatpak-builder >= 1.4.6
+      - name: Install dependencies
+        run: |
+          apt install -yU git flatpak-builder
+
       - name: Checkout
         run: |
           git config --global --add safe.directory /__w/appcenter-reviews/appcenter-reviews
@@ -68,11 +73,6 @@ jobs:
         uses: elementary/action-appcenter-review-find-manifest@v1.5.1
         with:
           rdnn: ${{ needs.parse.outputs.rdnn }}
-
-      # FIXME: Remove when we update to the container with flatpak-builder >= 1.4.6
-      - name: Install flatpak-builder
-        run: |
-          apt install -yU flatpak-builder
 
       - name: Build
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6.6
