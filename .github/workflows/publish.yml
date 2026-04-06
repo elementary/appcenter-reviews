@@ -60,7 +60,7 @@ jobs:
       # FIXME: Remove when we update to the container with flatpak-builder >= 1.4.6
       - name: Install dependencies
         run: |
-          apt install -yU git flatpak-builder
+          apt install -yU git flatpak-builder xvfb
 
       - name: Checkout
         run: |
