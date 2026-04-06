@@ -41,10 +41,13 @@ jobs:
     strategy:
       matrix:
         configuration:
+          # FIXME: Remove flat-manager-suffix when we update to the container with flatpak-builder >= 1.4.6
           - arch: x86_64
             runs-on: ubuntu-latest
+            flat-manager-suffix: amd64
           - arch: aarch64
             runs-on: ubuntu-24.04-arm
+            flat-manager-suffix: arm64
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
 
@@ -60,7 +63,9 @@ jobs:
       # FIXME: Remove when we update to the container with flatpak-builder >= 1.4.6
       - name: Install dependencies
         run: |
-          apt install -yU git flatpak-builder xvfb
+          apt install -yU curl git flatpak-builder xvfb
+          curl https://github.com/flatpak/flat-manager/releases/download/0.5.0/flat-manager-client.${{ matrix.configuration.flat-manager-suffix }} > /usr/bin/flat-manager-client
+          chmod +x /usr/bin/flat-manager-client
 
       - name: Checkout
         run: |
