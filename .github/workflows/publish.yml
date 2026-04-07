@@ -45,9 +45,11 @@ jobs:
           - arch: x86_64
             runs-on: ubuntu-latest
             flat-manager-suffix: amd64
+            flat-manager-sha256: 9733a148ac185bc8d7fb0429a43f9ad7d934635760bb71933658642c697f87c9
           - arch: aarch64
             runs-on: ubuntu-24.04-arm
             flat-manager-suffix: arm64
+            flat-manager-sha256: fa9a916badc539ff7319895789f004dc99b81eb8e90a75857232121650335956
       # Don't fail the whole workflow if one architecture fails
       fail-fast: false
 
@@ -64,7 +66,9 @@ jobs:
       - name: Install dependencies
         run: |
           apt install -yU curl git flatpak-builder xvfb
-          curl https://github.com/flatpak/flat-manager/releases/download/0.5.0/flat-manager-client.${{ matrix.configuration.flat-manager-suffix }} > /usr/bin/flat-manager-client
+          curl https://github.com/flatpak/flat-manager/releases/download/0.5.0/flat-manager-client.${{ matrix.configuration.flat-manager-suffix }} > ./flat-manager-client
+          sha256sum ./flat-manager-client | grep -w ${{ matrix.configuration.flat-manager-sha256 }}
+          sudo mv ./flat-manager-client /usr/bin/flat-manager-client
           chmod +x /usr/bin/flat-manager-client
 
       - name: Checkout
