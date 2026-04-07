@@ -72,7 +72,7 @@ jobs:
             echo "flat-manager-client verify error! got $CHKSUM"
             exit 1
           fi
-          sudo mv ./flat-manager-client /usr/bin/flat-manager-client
+          mv ./flat-manager-client /usr/bin/flat-manager-client
           chmod +x /usr/bin/flat-manager-client
 
       - name: Checkout
