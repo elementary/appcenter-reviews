@@ -67,7 +67,11 @@ jobs:
         run: |
           apt install -yU curl git flatpak-builder xvfb
           curl https://github.com/flatpak/flat-manager/releases/download/0.5.0/flat-manager-client.${{ matrix.configuration.flat-manager-suffix }} > ./flat-manager-client
-          sha256sum ./flat-manager-client | grep -w ${{ matrix.configuration.flat-manager-sha256 }}
+          CHKSUM=$(sha256sum ./flat-manager-client | awk '{ print $1 }')
+          if [ "$CHKSUM" != "${{ matrix.configuration.flat-manager-sha256 }}" ]; then
+            echo "flat-manager-client verify error! got $CHKSUM"
+            exit 1
+          fi
           sudo mv ./flat-manager-client /usr/bin/flat-manager-client
           chmod +x /usr/bin/flat-manager-client
 
