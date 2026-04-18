@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/ellie-commons/cherrypick.git",
   "commit": "fca7efc8b244172b7a4af4172916b3a818ca62b2",
-  "version": "2.2.1"
+  "version": "2.2.1",
+  "end-of-life": "Reflect organization change",
+  "end-of-life-rebase": "io.github.elly_code.cherrypick"
 }
