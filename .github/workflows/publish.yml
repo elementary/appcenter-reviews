@@ -28,7 +28,7 @@ jobs:
 
       - name: Parse
         id: parse
-        uses: elementary/action-appcenter-review-parse@v1.2.5
+        uses: elementary/action-appcenter-review-parse@v1.3.0
         with:
           regex: |
             applications\/(?<rdnn>[a-zA-Z0-9\.\-\_]+)\.json
