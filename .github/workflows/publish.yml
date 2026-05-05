@@ -70,10 +70,10 @@ jobs:
         with:
           bundle: ${{ needs.parse.outputs.rdnn }}.flatpak
           manifest-path: ${{ steps.manifest.outputs.manifest }}
-          mirror-screenshots-url: https://flatpak.elementary.io/repo/screenshots
+          mirror-screenshots-url: https://flatpak.elementaryos.org/repo/media
           run-tests: false
           repository-name: appcenter
-          repository-url: https://flatpak.elementary.io/repo.flatpakrepo
+          repository-url: https://flatpak.elementaryos.org/repo.flatpakrepo
           branch: stable
           cache-key: "flatpak-builder-${{ github.sha }}"
           arch: ${{ matrix.configuration.arch }}
@@ -82,7 +82,7 @@ jobs:
         uses: flatpak/flatpak-github-actions/flat-manager@v6.7
         with:
           repository: appcenter
-          flat-manager-url: https://flatpak-api.elementary.io
+          flat-manager-url: https://flatpak-api.elementaryos.org
           token: ${{ secrets.FLAT_MANAGER_TOKEN }}
           end-of-life: "${{ needs.parse.outputs.end-of-life }}"
           end-of-life-rebase: ${{ needs.parse.outputs.end-of-life-rebase }}
