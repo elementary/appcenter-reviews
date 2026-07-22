@@ -24,6 +24,12 @@
             with:
               token: ${{ secrets.GIT_USER_TOKEN }}
               body: |
+                ## Submission Checklist
+                Please read and fill in the following checklist if each statement is true. Submissions that does not satisfy this checklist can be rejected by reviewers.
+                
+                - [ ] I agree with [Code of Conduct](https://github.com/elementary/appcenter-reviews?tab=coc-ov-file) and [Contrubuting Guideline](https://github.com/elementary/appcenter-reviews?tab=contributing-ov-file)
+                - [ ] The application I submit does not include AI generated contents
+                
                 ## Review Checklist
                 This checklist is used by reviewers, so you don't need to fill in by yourself.
     
