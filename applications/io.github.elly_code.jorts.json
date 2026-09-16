@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/elly-code/jorts.git",
   "commit": "1b0d174f2be33a1c9836debbd8dfd821aeaaa78b",
-  "version": "4.3.0"
+  "version": "4.3.0",
+  "end-of-life": "Reflect domain change",
+  "end-of-life-rebase": "page.codeberg.elly_code.jorts"
 }
