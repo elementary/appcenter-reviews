@@ -2,4 +2,6 @@
   "source": "https://github.com/phase1geo/Outliner.git",
   "commit": "3fc58d3a5e43a9a4eb9b0ac11ae06d4a7210f79f",
   "version": "1.7.0"
+  "end-of-life": "Change from com.github to io.github",
+  "end-of-life-rebase": "io.github.phase1geo.outliner"
 }
