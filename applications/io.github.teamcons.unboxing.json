@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/teamcons/unboxing.git",
   "commit": "10fee35d2bd79f41705ba2f9a6293f1294bdd153",
-  "version": "1.0.2"
+  "version": "1.0.2",
+  "end-of-life": "Reflect domain change",
+  "end-of-life-rebase": "page.codeberg.elly_code.unboxing"
 }
