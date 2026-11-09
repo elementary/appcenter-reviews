@@ -1,5 +1,7 @@
 {
   "source": "https://github.com/phase1geo/Minder.git",
   "commit": "90b70e1130bd7d852363544fef9cbe6240e062ba",
-  "version": "2.0.9"
+  "version": "2.0.9",
+  "end-of-life": "Change from com.github to io.github",
+  "end-of-life-rebase": "io.github.phase1geo.minder"
 }
